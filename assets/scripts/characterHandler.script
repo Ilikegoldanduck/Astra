@@ -1,5 +1,12 @@
 local velocity = vmath.vector3()
 
+local inputTable = {
+	false,
+	false,
+	false,
+	false
+}
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 end
@@ -37,16 +44,34 @@ function on_message(self, message_id, message, sender)
 	-- Remove this function if not needed
 end
 
+--inputTable 1 = up 2 = down 3 = left 4 = right
+
 function on_input(self, action_id, action)
 	if action_id == hash("up") then
-		velocity.y = 10
+		if action.pressed then
+			inputTable[1] = true
+		elseif action.released then
+			inputTable[1] = false
+		end
 	elseif action_id == hash("down") then
-		velocity.y = -10
+		if action.pressed then
+			inputTable[2] = true
+		elseif action.released then
+			inputTable[2] = false
+		end
 	end
 	if action_id == hash("left") then
-		velocity.x = -10
+		if action.pressed then
+			inputTable[3] = true
+		elseif action.released then
+			inputTable[3] = false
+		end
 	elseif action_id == hash("right") then
-		velocity.x = 10
+		if action.pressed then
+			inputTable[4] = true
+		elseif action.released then
+			inputTable[4] = false
+		end
 	end	
 end
 
