@@ -1,3 +1,4 @@
+script: "/titleScreen/title.gui_script"
 nodes {
   position {
     x: 470.0

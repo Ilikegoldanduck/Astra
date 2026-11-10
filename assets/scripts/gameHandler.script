@@ -1,4 +1,5 @@
 function init(self)
+	msg.post(".", "acquire_input_focus")
 	msg.post("#title", "load")
 end
 
@@ -8,8 +9,6 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("proxy_loaded") then
 		msg.post(sender, "enable")
 		prevProxy = sender
-	elseif message_id == hash("")
-
 	elseif message_id == hash("load") then
 		msg.post(prevProxy, "unload")
 		msg.post("#" .. message[1], "load")
