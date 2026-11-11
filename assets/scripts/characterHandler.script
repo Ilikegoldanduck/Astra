@@ -61,7 +61,7 @@ function fixed_update(self, dt)
 			end
 		end
 		if velocity.y ~= 0 then
-			local yHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(velocity.y + (sign(velocity.y) * 10), 0, 0), {hash("wall")})
+			local yHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(0, velocity.y + (sign(velocity.y) * 10), 0), {hash("wall")})
 			if yHit then
 				velocity.y = sign(velocity.y) * ((math.abs(velocity.y) + 10) * yHit.fraction - 10)
 			end
