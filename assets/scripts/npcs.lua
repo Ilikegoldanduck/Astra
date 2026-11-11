@@ -5,7 +5,6 @@ local npcTable = {
 }
 
 function npcs.getNpcs(npc) 
-    pprint(npc)
     return npcTable[npc]
 end
 
