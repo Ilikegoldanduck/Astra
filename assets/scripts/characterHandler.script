@@ -104,7 +104,8 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("wall") and math.floor(message.distance) > 0 then
 			inWall = true
-			if phase and message.group == hash("/normalWall") then
+			pprint(message)
+			if phase and message.other_id == hash("/normalWall") then
 				go.set_position(go.get_position() + (message.normal * message.distance))
 			elseif not phase and message.other_id == hash("/astralWall") then
 				go.set_position(go.get_position() + (message.normal * message.distance))
