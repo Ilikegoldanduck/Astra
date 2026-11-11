@@ -19,6 +19,8 @@ local inputTable = {
 	false,
 	false
 }
+local lastInput = ""
+local currAnim = "downIdle"
 
 local function sign(n)
 	if n > 0 then
@@ -30,16 +32,23 @@ local function sign(n)
 	end
 end
 
+local function changeAnim()
+	if lastInput ~= currAnim then
+		sprite.play_flipbook("#sprite", lastInput)
+		currAnim = lastInput
+	end
+end
+
 local function move(vel)
 	if math.sqrt(vel.x ^ 2 + vel.y ^ 2) > 0 then
 		if vel.x ~= 0 then
-			local xHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(vel.x + (sign(vel.x) * 10), 0, 0), {hash("wall")})
+			local xHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(vel.x + (sign(vel.x) * 17), 0, 0), {hash("wall")})
 			if xHit and ((phase and xHit.id == hash("/normalWall")) or (not phase and xHit.id == hash("/astralWall"))) then
 				vel.x = sign(vel.x) * ((math.abs(vel.x) + 10) * xHit.fraction - 10)
 			end
 		end
 		if vel.y ~= 0 then
-			local yHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(0, vel.y + (sign(vel.y) * 10), 0), {hash("wall")})
+			local yHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(0, vel.y + (sign(vel.y) * 17), 0), {hash("wall")})
 			if yHit and ((phase and yHit.id == hash("/normalWall")) or (not phase and yHit.id == hash("/astralWall"))) then
 				vel.y = sign(vel.y) * ((math.abs(vel.y) + 10) * yHit.fraction - 10)
 			end

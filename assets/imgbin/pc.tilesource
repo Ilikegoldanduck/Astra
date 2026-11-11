@@ -1,0 +1,77 @@
+image: "/assets/imgbin/pc.png"
+tile_width: 34
+tile_height: 34
+collision_groups: "default"
+animations {
+  id: "downIdle"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 1
+  frames: 2
+  frames: 3
+  frames: 4
+}
+animations {
+  id: "downWalk"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 5
+  frames: 6
+  frames: 7
+  frames: 8
+}
+animations {
+  id: "leftIdle"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 25
+  frames: 26
+  frames: 27
+  frames: 28
+}
+animations {
+  id: "leftWalk"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 29
+  frames: 30
+  frames: 31
+  frames: 32
+}
+animations {
+  id: "rightIdle"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 9
+  frames: 10
+  frames: 11
+  frames: 12
+}
+animations {
+  id: "rightWalk"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 13
+  frames: 14
+  frames: 15
+  frames: 16
+}
+animations {
+  id: "upIdle"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 17
+  frames: 18
+  frames: 19
+  frames: 20
+}
+animations {
+  id: "upWalk"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  frames: 21
+  frames: 22
+  frames: 23
+  frames: 24
+}
+extrude_borders: 2
