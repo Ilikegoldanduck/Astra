@@ -48,6 +48,8 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 	velocity = vmath.vector3()
 	playerPos = vmath.vector3()
+	msg.post("/astralMap", "disable")
+
 end
 
 function update(self, dt)
@@ -95,7 +97,6 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("wall") and math.floor(message.distance) > 0 then
 			inWall = true
-			pprint("ran" .. message.distance)
 			if phase and message.group == hash("/normalWall") then
 				go.set_position(go.get_position() + (message.normal * message.distance))
 			elseif not phase and message.other_id == hash("/astralWall") then
@@ -139,7 +140,7 @@ function on_input(self, action_id, action)
 			inputTable[4] = false
 		end
 	elseif action_id == hash("action1") then
-
+		
 		--talking/interact
 	elseif action_id == hash("action2") and action.pressed and not rollCd then
 		roll = true
@@ -160,9 +161,14 @@ function on_input(self, action_id, action)
 		end)
 		--menu
 	elseif action_id == hash("phase") and action.pressed then
-		pprint(inWall)
 		if not inWall then
 			phase = not phase
+			if phase then
+				msg.post("/normalMap", "enable")
+				msg.post("/astralMap", "disable")
+			else
+				msg.post("/normalMap", "disable")
+			end
 		end
 		--phase switch
 	end	
