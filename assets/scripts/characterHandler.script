@@ -6,7 +6,7 @@ local rollCd = false
 local menuCd = true
 local text = false
 
-local interactTable = {"", ""}
+local interact = {"", ""}
 
 -- true = normal false = astral
 local phase = true
@@ -47,11 +47,10 @@ local function move(vel)
 end
 
 function init(self)
-	msg.post("/player/go#camera", "acquire_camera_focus")
+	msg.post("/go#camera", "acquire_camera_focus")
 	msg.post(".", "acquire_input_focus")
 	velocity = vmath.vector3()
 	playerPos = vmath.vector3()
-	msg.post("/astralMap", "disable")
 
 end
 
