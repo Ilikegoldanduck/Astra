@@ -19,8 +19,8 @@ local inputTable = {
 	false,
 	false
 }
-local lastInput = ""
-local currAnim = "downIdle"
+local lastInput = "down"
+local currAnim = ""
 
 local function sign(n)
 	if n > 0 then
@@ -32,14 +32,15 @@ local function sign(n)
 	end
 end
 
-local function changeAnim()
-	if lastInput ~= currAnim then
-		sprite.play_flipbook("#sprite", lastInput)
-		currAnim = lastInput
+local function changeAnim(input)
+	if input ~= currAnim then
+		sprite.play_flipbook("#sprite", input)
+		currAnim = input
 	end
 end
 
 local function move(vel)
+	pprint(vel)
 	if math.sqrt(vel.x ^ 2 + vel.y ^ 2) > 0 then
 		if vel.x ~= 0 then
 			local xHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(vel.x + (sign(vel.x) * 17), 0, 0), {hash("wall")})
@@ -54,7 +55,12 @@ local function move(vel)
 			end
 		end
 		go.set_position(go.get_position() + vel)
+		changeAnim(lastInput .. "Walk")
+	else
+		changeAnim(lastInput .. "Idle")
 	end
+
+	
 end
 
 function init(self)
@@ -93,15 +99,19 @@ function fixed_update(self, dt)
 
 		elseif inputTable[1] then
 			velocity.y = velocity.y + 5
+			lastInput = "up"
 		elseif inputTable[2] then
 			velocity.y = velocity.y - 5
+			lastInput = "down"
 		end
 		if inputTable[3] and inputTable[4] then
 
 		elseif inputTable[3] then
 			velocity.x = velocity.x - 5
+			lastInput = "left"
 		elseif inputTable[4] then
 			velocity.x = velocity.x + 5
+			lastInput = "right"
 		end
 		move(velocity)
 		inWall = false
