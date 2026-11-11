@@ -107,6 +107,14 @@ function on_input(self, action_id, action)
 		elseif action.released then
 			inputTable[4] = false
 		end
+	elseif action_id == hash("action1") then
+		--talking/interact
+	elseif action_id == hash("action2") then
+		--dash
+	elseif action_id == hash("action3") then
+		--menu
+	elseif action_id == hash("dash") then
+		--phase switch
 	end	
 end
 
