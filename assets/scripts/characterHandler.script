@@ -1,4 +1,4 @@
-local velocity = vmath.vector3()
+
 
 local inputTable = {
 	false,
@@ -8,14 +8,8 @@ local inputTable = {
 }
 
 function init(self)
-	msg.post("/camera#camera", "acquire_camera_focus")
+	msg.post("/player#camera", "acquire_camera_focus")
 	msg.post(".", "acquire_input_focus")
-end
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
 end
 
 function update(self, dt)
@@ -48,9 +42,11 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == hash("contact_point_response") then
+		if message.group == hash("wall") then
+
+		end
+	end
 end
 
 --inputTable 1 = up 2 = down 3 = left 4 = right
