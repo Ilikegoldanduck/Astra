@@ -3,6 +3,7 @@ local mode = 0
 local npc = {}
 local npcs = require("assets.scripts.npcs")
 
+local unabled = false
 local index = 1
 
 function init(self)
@@ -64,6 +65,11 @@ function on_message(self, message_id, message, sender)
 		npc = npcs.getNpcs(message[1][2])
 		setText(npc, index)
 		openText()
+	elseif message_id == hash("unable") and not unabled then
+		unabled = true
+		gui.animate(gui.get_node("unable"), "color.w", 1, gui.EASING_LINEAR, .5, 0, function()
+			unabled = false
+		end, gui.PLAYBACK_ONCE_PINGPONG)
 	end
 end
 

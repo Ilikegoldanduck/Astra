@@ -3,6 +3,7 @@ local moveMulti = 1
 
 local roll = false
 local rollCd = false
+local menu = false
 local menuCd = true
 local text = false
 
@@ -104,7 +105,6 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("wall") and math.floor(message.distance) > 0 then
 			inWall = true
-			pprint(message)
 			if phase and message.other_id == hash("/normalWall") then
 				go.set_position(go.get_position() + (message.normal * message.distance))
 			elseif not phase and message.other_id == hash("/astralWall") then
@@ -119,9 +119,6 @@ function on_message(self, message_id, message, sender)
 		elseif message.group == hash("interact") then
 			interact[1] = "interact"
 			interact[2] = message.other_id
-		else
-			interact[1] = ""
-			interact[2] = ""
 		end
 	elseif message_id == hash("text") then
 		text = false
@@ -191,6 +188,8 @@ function on_input(self, action_id, action)
 			else
 				go.set_position(vmath.vector3(0, 0, -1), "/go")
 			end
+		else
+			msg.post("main:/gui#main", "unable", {})
 		end
 		--phase switch
 	end	
