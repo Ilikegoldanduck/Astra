@@ -49,8 +49,9 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
-		if message.group == hash("wall") then
-			go.set_position()
+		if message.group == hash("wall") and message.distance > 0 then
+				go.set_position(go.get_position() + (message.normal * message.distance))
+			end
 		end
 	end
 end
