@@ -95,6 +95,8 @@ function fixed_update(self, dt)
 		end
 		move(velocity)
 		inWall = false
+		interact[1] = ""
+		interact[2] = ""
 	end
 end
 
