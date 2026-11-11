@@ -47,7 +47,7 @@ local function move(vel)
 end
 
 function init(self)
-	msg.post("/player#camera", "acquire_camera_focus")
+	msg.post("/player/go#camera", "acquire_camera_focus")
 	msg.post(".", "acquire_input_focus")
 	velocity = vmath.vector3()
 	playerPos = vmath.vector3()
@@ -182,10 +182,9 @@ function on_input(self, action_id, action)
 		if not inWall then
 			phase = not phase
 			if phase then
-				msg.post("/normalMap", "enable")
-				msg.post("/astralMap", "disable")
+				go.set_position(vmath.vector3(0, 0, 0), "/go")
 			else
-				msg.post("/normalMap", "disable")
+				go.set_position(vmath.vector3(0, 0, -1), "/go")
 			end
 		end
 		--phase switch
