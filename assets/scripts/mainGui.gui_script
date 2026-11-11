@@ -42,6 +42,10 @@ function closeText()
 
 end
 
+function setText(text)
+	pprint(text)
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("menu") then
 		if message[1] then
@@ -52,7 +56,7 @@ function on_message(self, message_id, message, sender)
 		end
 	elseif message_id == hash("talk") then
 		mode = 2
-		npc = message[1]
+		setText(npcs.getNpcs(message[1][2]))
 		openText()
 	end
 end
