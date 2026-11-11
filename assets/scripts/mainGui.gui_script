@@ -42,7 +42,7 @@ end
 function closeText()
 	gui.set_enabled(gui.get_node("talking"), false)
 	msg.post(".", "release_input_focus")
-	msg.post(":ch1/player#characterHandler", "talking", {false})
+	npcs.offNpc(true)
 end
 
 function setText(text, order)
@@ -60,8 +60,9 @@ function on_message(self, message_id, message, sender)
 		end
 	elseif message_id == hash("talk") then
 		mode = 2
+		index = 1
 		npc = npcs.getNpcs(message[1][2])
-		setText(npc, 1)
+		setText(npc, index)
 		openText()
 	end
 end
