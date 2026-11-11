@@ -1,4 +1,4 @@
-
+local velocity = vmath.vector3()
 
 local inputTable = {
 	false,
@@ -10,6 +10,7 @@ local inputTable = {
 function init(self)
 	msg.post("/player#camera", "acquire_camera_focus")
 	msg.post(".", "acquire_input_focus")
+	velocity = vmath.vector3()
 end
 
 function update(self, dt)
@@ -25,26 +26,31 @@ function late_update(self, dt)
 end
 
 function fixed_update(self, dt)
+	velocity.x = 0
+	velocity.y = 0
 	if inputTable[1] and inputTable[2] then
 
 	elseif inputTable[1] then
-		go.set_position(go.get_position() + vmath.vector3(0, 5, 0))
+			velocity.y = velocity.y + 5
 	elseif inputTable[2] then
-		go.set_position(go.get_position() + vmath.vector3(0, -5, 0))
+			velocity.y = velocity.y - 5
 	end
 	if inputTable[3] and inputTable[4] then
 
 	elseif inputTable[3] then
-		go.set_position(go.get_position() + vmath.vector3(-5, 0, 0))
+			velocity.x = velocity.x - 5
 	elseif inputTable[4] then
-		go.set_position(go.get_position() + vmath.vector3(5, 0, 0))
+			velocity.x = velocity.x + 5
+	end
+	if math.sqrt(velocity.x ^ 2 + velocity.y ^ 2) > 0 then
+		go.set_position(go.get_position() + velocity)
 	end
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("wall") then
-
+			go.set_position()
 		end
 	end
 end
