@@ -4,6 +4,9 @@ local moveMulti = 1
 local roll = false
 local rollCd = false
 local menuCd = true
+local text = false
+
+local interactTable = {"", ""}
 
 -- true = normal false = astral
 local phase = true
@@ -105,6 +108,18 @@ function on_message(self, message_id, message, sender)
 		else
 			inWall = false
 		end
+		if phase and message.group == hash("npc") then
+			interact[1] = "npc"
+			interact[2] = message.other_id
+		elseif message.group == hash("interact") then
+			interact[1] = "interact"
+			interact[2] = message.other_id
+		else
+			interact[1] = ""
+			interact[2] = ""
+		end
+	elseif message_id == hash("text") then
+		text = false
 	end
 end
 
@@ -140,7 +155,10 @@ function on_input(self, action_id, action)
 			inputTable[4] = false
 		end
 	elseif action_id == hash("action1") then
-		
+		text = true
+		if interact[1] ~= "" then
+			msg.post("main:/gui#main", "text", {interact})
+		end
 		--talking/interact
 	elseif action_id == hash("action2") and action.pressed and not rollCd then
 		roll = true
