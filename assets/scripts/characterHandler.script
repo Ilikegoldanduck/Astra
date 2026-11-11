@@ -90,29 +90,29 @@ function fixed_update(self, dt)
 			text = false
 		end
 	elseif roll then
-		move(velocity * 3)
+		move(velocity * 3 * moveMulti)
 	else
 		velocity.x = 0
 		velocity.y = 0
 		if inputTable[1] and inputTable[2] then
 
 		elseif inputTable[1] then
-			velocity.y = velocity.y + 5
+			velocity.y = velocity.y + 3
 			lastInput = "up"
 		elseif inputTable[2] then
-			velocity.y = velocity.y - 5
+			velocity.y = velocity.y - 3
 			lastInput = "down"
 		end
 		if inputTable[3] and inputTable[4] then
 
 		elseif inputTable[3] then
-			velocity.x = velocity.x - 5
+			velocity.x = velocity.x - 3
 			lastInput = "left"
 		elseif inputTable[4] then
-			velocity.x = velocity.x + 5
+			velocity.x = velocity.x + 3
 			lastInput = "right"
 		end
-		move(velocity)
+		move(velocity * moveMulti)
 		inWall = false
 		interact[1] = ""
 		interact[2] = ""
@@ -142,9 +142,6 @@ function on_message(self, message_id, message, sender)
 end
 
 --inputTable 1 = up 2 = down 3 = left 4 = right
-
-local a1 = vmath.vector3(-1, -1, 0)
-local a2 = vmath.vector3(1, 1, 0)
 
 function on_input(self, action_id, action)
 	if action_id == hash("up") then
@@ -201,8 +198,10 @@ function on_input(self, action_id, action)
 			phase = not phase
 			if phase then
 				go.set_position(vmath.vector3(0, 0, 0), "/go")
+				moveMulti = 1
 			else
 				go.set_position(vmath.vector3(0, 0, -1), "/go")
+				moveMulti = 1.5
 			end
 		else
 			msg.post("main:/gui#main", "unable", {})
