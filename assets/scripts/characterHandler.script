@@ -44,20 +44,28 @@ local function changeAnim(input)
 	end
 end
 
+local boxVel = vmath.vector3()
+
 local function dropBox()
 	if pickup then
+		boxVel.x = 0
+		boxVel.y = 0
 		pickup = false
-		local pos = vmath.vector3()
 		if lastInput == "left" then
-			pos = go.get_position() + vmath.vector3(-32, 0, 0)
+			boxVel.x = -32
 		elseif lastInput == "down" then
-			pos = go.get_position() + vmath.vector3(0, -32, 0)
+			boxVel.y = -32
 		elseif lastInput == "up" then
-			pos = go.get_position() + vmath.vector3(0, 32, 0)
+			boxVel.y = 32
 		else
-			pos = go.get_position() + vmath.vector3(32, 0, 0)
+			boxVel.x = 32
 		end
-		go.set_position(pos, box)
+		local bCheck = physics.raycast(go.get_position(), go.get_position() + boxVel, {hash("wall")})
+		if bCheck and bCheck.id ~= hash("astralWall") then
+			boxVel.x = boxVel.x * bCheck.fraction
+			boxVel.y = boxVel.y * bCheck.fraction
+		end
+		go.set_position(go.get_position() + boxVel, box)
 		msg.post(box, "pickup", {pickup})
 		box = nil
 	end
