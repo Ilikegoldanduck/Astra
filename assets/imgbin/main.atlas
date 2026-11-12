@@ -1,0 +1,4 @@
+images {
+  image: "/assets/imgbin/box.png"
+}
+extrude_borders: 2
