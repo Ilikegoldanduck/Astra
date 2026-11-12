@@ -33,8 +33,14 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("interact") then
-		pprint(message)
-		pprint(sender)
+		if sender.path == hash("/lever1") then
+			pprint("done!")
+			if message[1] then
+				msg.post("wall#lever1", "disable")
+			else
+				msg.post("wall#lever1", "enable")
+			end
+		end
 	end
 end
 
