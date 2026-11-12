@@ -223,7 +223,7 @@ function on_input(self, action_id, action)
 			elseif interact[1] ~= "box" then
 				text = true
 				msg.post("main:/gui#main", "talk", {interact})
-				msg.post(interact[2], "talk")
+				msg.post(interact[2], "interact")
 			end
 		elseif pickup then
 			dropBox()

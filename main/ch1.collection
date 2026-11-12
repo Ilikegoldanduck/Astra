@@ -3,16 +3,32 @@ instances {
   id: "box"
   prototype: "/assets/gameObjects/box.go"
   position {
-    x: -96.406235
-    y: -38.838524
+    x: 401.0
+    y: 48.0
   }
 }
 instances {
   id: "box1"
   prototype: "/assets/gameObjects/box.go"
   position {
-    x: -24.899124
-    y: -43.720802
+    x: 401.0
+    y: 16.0
+  }
+}
+instances {
+  id: "box2"
+  prototype: "/assets/gameObjects/box.go"
+  position {
+    x: 401.0
+    y: -16.0
+  }
+}
+instances {
+  id: "box3"
+  prototype: "/assets/gameObjects/box.go"
+  position {
+    x: 401.0
+    y: -48.0
   }
 }
 scale_along_z: 0
@@ -53,6 +69,7 @@ embedded_instances {
   "mask: \\\"wall\\\"\\n"
   "mask: \\\"npc\\\"\\n"
   "mask: \\\"box\\\"\\n"
+  "mask: \\\"interact\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"
   "    shape_type: TYPE_SPHERE\\n"
@@ -468,14 +485,56 @@ embedded_instances {
   id: "boxes"
   children: "box"
   children: "box1"
+  children: "box2"
+  children: "box3"
   data: ""
+  position {
+    z: 1.0
+  }
 }
 embedded_instances {
   id: "interactables"
   children: "lever1"
-  data: ""
+  data: "components {\n"
+  "  id: \"ch1\"\n"
+  "  component: \"/assets/scripts/ch1.script\"\n"
+  "}\n"
+  ""
+  position {
+    z: 1.0
+  }
 }
 embedded_instances {
   id: "lever1"
-  data: ""
+  data: "components {\n"
+  "  id: \"lever\"\n"
+  "  component: \"/assets/scripts/lever.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"anim\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/builtins/graphics/particle_blob.tilesource\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_DYNAMIC\\n"
+  "mass: 1.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"interact\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 263.0
+    y: 113.0
+  }
 }
