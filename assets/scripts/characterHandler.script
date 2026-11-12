@@ -61,7 +61,8 @@ local function dropBox()
 			boxVel.x = 32
 		end
 		local bCheck = physics.raycast(go.get_position(), go.get_position() + boxVel, {hash("wall")})
-		if bCheck and bCheck.id ~= hash("astralWall") then
+		if bCheck and bCheck.id ~= hash("/astralWall") then
+			pprint(bCheck)
 			boxVel.x = boxVel.x * bCheck.fraction
 			boxVel.y = boxVel.y * bCheck.fraction
 		end
@@ -82,7 +83,6 @@ local function move(vel)
 		if vel.y ~= 0 then
 			local yHit = physics.raycast(go.get_position(), go.get_position() + vmath.vector3(0, vel.y + (sign(vel.y) * 17), 0), {hash("wall")})
 			if yHit and ((yHit.id ~= hash("/normalWall") and yHit.id ~= hash("/astralWall")) or (phase and yHit.id == hash("/normalWall")) or (not phase and yHit.id == hash("/astralWall"))) then
-				pprint(yHit.id)
 				vel.y = sign(vel.y) * ((math.abs(vel.y) + 10) * yHit.fraction - 10)
 			end
 		end
@@ -94,8 +94,6 @@ local function move(vel)
 	else
 		changeAnim(lastInput .. "Idle")
 	end
-
-	
 end
 
 function init(self)
