@@ -1,21 +1,37 @@
 go.property("pickup", false)
 go.property("set", true)
+go.property("checkers", 0)
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("pickup") then
 		self.pickup = message[1]
+		if message[1] then
+			msg.post("#collisionobject1", "disable")
+		else
+			msg.post("#collisionobject1", "enable")
+		end
 		self.set = false
 		timer.delay(.1, false, function()
 			self.set = true
 		end)
-	elseif not self.set and not self.pickup and message_id == hash("contact_point_response") and message.group == hash("wall") and math.floor(message.distance) > 0 then
-		if message.other_id ~= hash("/astralWall") and message.other_id ~= hash(go.get_id()) then
-			pprint(message)
+	elseif not self.pickup and message_id == hash("contact_point_response") and message.group == hash("wall") and math.floor(message.distance) > 0 then
+		if not self.set and message.other_id ~= hash("/astralWall") and message.other_id ~= hash(go.get_id()) then
 			if message.distance > 16 then
 				go.set_position(go.get_position() + (message.normal * 16))
 			else
 				go.set_position(go.get_position() + (message.normal * message.distance))
 			end
+		elseif self.set and message.other_id ~= hash("/astralWall") and message.other_id ~= hash(go.get_id()) then
+			self.checkers = self.checkers + 1
+			if self.checkers > 3 then
+				self.set = false
+				timer.delay(.1, false, function()
+					self.set = true
+				end)
+			end
+			timer.delay(.1, false, function()
+				self.checkers = self.checkers - 1
+			end)
 		end
 	end 
 end
