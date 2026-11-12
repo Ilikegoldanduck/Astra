@@ -1,11 +1,12 @@
 local pickup = false
 
 function on_message(self, message_id, message, sender)
+	pprint(message)
+	pprint(message_id)
 	if message_id == hash("pickup") then
 		pickup = message[1]
-	elseif not pickup and message_id == hash("contact_point_response") and pickup and message.group == hash("wall") and math.floor(message.distance) > 0 then
-		if message.other_id ~= hash("/wall") or message.other_id == hash("/normalWall") then
-			pprint(message)
+	elseif not pickup and message_id == hash("contact_point_response") and message.group == hash("wall") and math.floor(message.distance) > 0 then
+		if message.other_id == hash("/wall") or message.other_id == hash("/normalWall") then
 			go.set_position(go.get_position() + (message.normal * message.distance))
 		end
 	end 
