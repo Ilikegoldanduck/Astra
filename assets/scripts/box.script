@@ -5,15 +5,15 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("pickup") then
 		self.pickup = message[1]
 		self.set = false
+		timer.delay(.1, false, function()
+			self.set = true
+		end)
 	elseif not self.set and not self.pickup and message_id == hash("contact_point_response") and message.group == hash("wall") and math.floor(message.distance) > 0 then
 		if message.other_id ~= hash("/astralWall") and message.other_id ~= hash(go.get_id()) then
 			if message.distance > 16 then
 				go.set_position(go.get_position() + (message.normal * 16))
 			else
 				go.set_position(go.get_position() + (message.normal * message.distance))
-				timer.delay(.1, false, function()
-					self.set = true
-				end)
 			end
 		end
 	end 
