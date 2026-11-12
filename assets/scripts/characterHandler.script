@@ -7,6 +7,9 @@ local menu = false
 local menuCd = true
 local text = false
 
+local pickup = false
+local box = nil
+
 local interact = {"", ""}
 local npcs = require("assets.scripts.npcs")
 
@@ -32,6 +35,8 @@ local function sign(n)
 	end
 end
 
+local offset = vmath.vector3(0, 64, 0)
+
 local function changeAnim(input)
 	if input ~= currAnim then
 		sprite.play_flipbook("#sprite", input)
@@ -54,6 +59,9 @@ local function move(vel)
 			end
 		end
 		go.set_position(go.get_position() + vel)
+		if pickup then
+			go.set_position(go.get_position() + offset, box)
+		end
 		changeAnim(lastInput .. "Walk")
 	else
 		changeAnim(lastInput .. "Idle")
@@ -135,6 +143,9 @@ function on_message(self, message_id, message, sender)
 		elseif message.group == hash("interact") then
 			interact[1] = "interact"
 			interact[2] = message.other_id
+		elseif message.group == hash("box") and not pickup then
+			interact[1] = "box"
+			interact[2] = message.other_id
 		end
 	elseif message_id == hash("text") then
 		text = false
@@ -171,8 +182,15 @@ function on_input(self, action_id, action)
 		end
 	elseif action_id == hash("action1") and action.pressed and not menu and not text then
 		if interact[1] ~= "" then
-			text = true
-			msg.post("main:/gui#main", "talk", {interact})
+			if interact[1] == "box" then
+				pickup = true
+				box = interact[2]
+			else
+				text = true
+				msg.post("main:/gui#main", "talk", {interact})
+			end
+		elseif pickup then
+			pickup = false
 		end
 		--talking/interact
 	elseif action_id == hash("action2") and action.pressed and not rollCd and not menu and not text then
