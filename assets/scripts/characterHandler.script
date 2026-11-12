@@ -50,7 +50,6 @@ local boxVel = vmath.vector3()
 
 local function dropBox(override)
 	if pickup then
-		pprint(override)
 		boxVel.x = 0
 		boxVel.y = 0
 		pickup = false
@@ -71,7 +70,7 @@ local function dropBox(override)
 		end
 		if pCheck then
 			pickup = true
-			if phase and override == nil then
+			if not phase and override == nil then
 				for i, v in ipairs({"left", "right", "up", "down"}) do
 					dropBox(v)
 					if not pickup then
@@ -79,7 +78,7 @@ local function dropBox(override)
 					end
 				end
 				if pickup then
-					phase = false
+					phase = true
 				end
 			end
 		else
@@ -264,8 +263,8 @@ function on_input(self, action_id, action)
 		--menu
 	elseif action_id == hash("phase") and action.pressed and not menu and not text then
 		if not inWall then
-			dropBox()
 			phase = not phase
+			dropBox()
 			if phase then
 				go.set_position(vmath.vector3(0, 0, 0), "/go")
 				moveMulti = 1
