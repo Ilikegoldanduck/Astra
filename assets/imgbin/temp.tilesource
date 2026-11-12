@@ -1,0 +1,9 @@
+image: "/assets/imgbin/temp.png"
+tile_width: 16
+tile_height: 16
+collision_groups: "default"
+animations {
+  id: "New Animation"
+  frames: 1
+}
+extrude_borders: 2

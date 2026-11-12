@@ -38,9 +38,11 @@ end
 local offset = vmath.vector3(0, 64, 0)
 
 local function changeAnim(input)
-	if input ~= currAnim then
+	if phase and input ~= currAnim then
 		sprite.play_flipbook("#sprite", input)
 		currAnim = input
+	elseif not phase then
+		
 	end
 end
 
@@ -62,7 +64,6 @@ local function dropBox()
 		end
 		local bCheck = physics.raycast(go.get_position(), go.get_position() + boxVel, {hash("wall")})
 		if bCheck and bCheck.id ~= hash("/astralWall") then
-			pprint(bCheck)
 			boxVel.x = boxVel.x * bCheck.fraction
 			boxVel.y = boxVel.y * bCheck.fraction
 		end
