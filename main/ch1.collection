@@ -466,5 +466,16 @@ embedded_instances {
 }
 embedded_instances {
   id: "boxes"
+  children: "box"
+  children: "box1"
+  data: ""
+}
+embedded_instances {
+  id: "interactables"
+  children: "lever1"
+  data: ""
+}
+embedded_instances {
+  id: "lever1"
   data: ""
 }
