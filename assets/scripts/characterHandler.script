@@ -48,16 +48,17 @@ end
 
 local boxVel = vmath.vector3()
 
-local function dropBox()
+local function dropBox(override)
 	if pickup then
+		pprint(override)
 		boxVel.x = 0
 		boxVel.y = 0
 		pickup = false
-		if lastInput == "left" then
+		if (override or lastInput) == "left" then
 			boxVel.x = -32
-		elseif lastInput == "down" then
+		elseif (override or lastInput) == "down" then
 			boxVel.y = -32
-		elseif lastInput == "up" then
+		elseif (override or lastInput) == "up" then
 			boxVel.y = 32
 		else
 			boxVel.x = 32
@@ -70,6 +71,17 @@ local function dropBox()
 		end
 		if pCheck then
 			pickup = true
+			if phase and override == nil then
+				for i, v in ipairs({"left", "right", "up", "down"}) do
+					dropBox(v)
+					if not pickup then
+						break
+					end
+				end
+				if pickup then
+					phase = false
+				end
+			end
 		else
 			go.set_position(go.get_position() + boxVel, box)
 			msg.post(box, "pickup", {pickup})
