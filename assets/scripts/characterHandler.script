@@ -224,7 +224,7 @@ function on_input(self, action_id, action)
 				msg.post(box, "pickup", {pickup})
 			elseif interact[1] ~= "box" then
 				--Reminder to call msg.post("main:/gui#main", "talk", {interact}) from the script it calls rather than from here because some interactables don't have messages!
-				msg.post(interact[2], "interact")
+				msg.post(interact[2], "interact", {phase})
 			end
 		elseif pickup then
 			dropBox()

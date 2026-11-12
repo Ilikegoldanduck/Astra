@@ -1,7 +1,7 @@
 go.property("flipped", false)
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("interact") then
+	if message[1] and message_id == hash("interact") then
 		self.flipped = not self.flipped
 		msg.post("/interactables#ch1", "interact", {self.flipped})
 	end
