@@ -42,7 +42,7 @@ local function changeAnim(input)
 		sprite.play_flipbook("#sprite", input)
 		currAnim = input
 	elseif not phase then
-		
+
 	end
 end
 
@@ -226,7 +226,9 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("action2") and action.pressed and not rollCd and not menu and not text then
 		roll = true
 		rollCd = true
+		msg.post("#sprite", "disable")
 		timer.delay(.1, false, function()
+			msg.post("#sprite", "enable")
 			roll = false
 		end)
 		timer.delay(.5, false, function()
