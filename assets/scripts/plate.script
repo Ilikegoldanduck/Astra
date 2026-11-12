@@ -25,13 +25,13 @@ function late_update(self, dt)
 end
 
 function fixed_update(self, dt)
+	msg.post("/interactables#ch1", "interact", {self.held})
 	self.held = false
 end
 
 function on_message(self, message_id, message, sender)
-	if not self.held and message_id == hash("contact_point_response") then
+	if message_id == hash("contact_point_response") then
 		self.held = true
-		msg.post("/interactables#ch1", "interact", {self.held})
 	end
 end
 

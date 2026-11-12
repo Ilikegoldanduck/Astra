@@ -34,12 +34,10 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("interact") then
 		if sender.path == hash("/lever1") then
-			pprint("done!")
 			wall1[1] = message[1]
 		elseif sender.path == hash("/plate") then
 			wall1[2] = message[1]
 		end
-		pprint(wall1)
 		if wall1[1] and wall1[2] then
 			msg.post("wall#lever1", "disable")
 		else
