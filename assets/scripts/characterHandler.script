@@ -68,7 +68,6 @@ local function dropBox()
 			boxVel.x = boxVel.x * bCheck.fraction
 			boxVel.y = boxVel.y * bCheck.fraction
 		end
-		pprint(pCheck)
 		if pCheck then
 			pickup = true
 		else
@@ -222,10 +221,9 @@ function on_input(self, action_id, action)
 				go.set_position(go.get_position() + offset, box)
 				msg.post(box, "pickup", {pickup})
 			elseif interact[1] ~= "box" then
-				pprint(interact)
 				text = true
 				msg.post("main:/gui#main", "talk", {interact})
-				msg.post(interact, "talk")
+				msg.post(interact[2], "talk")
 			end
 		elseif pickup then
 			dropBox()
