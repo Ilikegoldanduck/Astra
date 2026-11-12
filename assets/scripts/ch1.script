@@ -1,4 +1,4 @@
-
+local wall1 = {false, false}
 
 function init(self)
 	
@@ -35,11 +35,15 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("interact") then
 		if sender.path == hash("/lever1") then
 			pprint("done!")
-			if message[1] then
-				msg.post("wall#lever1", "disable")
-			else
-				msg.post("wall#lever1", "enable")
-			end
+			wall1[1] = message[1]
+		elseif sender.path == hash("/plate") then
+			wall1[2] = message[1]
+		end
+		pprint(wall1)
+		if wall1[1] and wall1[2] then
+			msg.post("wall#lever1", "disable")
+		else
+			msg.post("wall#lever1", "enable")
 		end
 	end
 end

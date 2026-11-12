@@ -31,6 +31,22 @@ instances {
     y: -48.0
   }
 }
+instances {
+  id: "lever1"
+  prototype: "/assets/gameObjects/lever.go"
+  position {
+    x: 292.41165
+    y: 107.38212
+  }
+}
+instances {
+  id: "plate"
+  prototype: "/assets/gameObjects/plate.go"
+  position {
+    x: 309.65082
+    y: -112.14754
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "player"
@@ -521,6 +537,7 @@ embedded_instances {
 embedded_instances {
   id: "interactables"
   children: "lever1"
+  children: "plate"
   data: "components {\n"
   "  id: \"ch1\"\n"
   "  component: \"/assets/scripts/ch1.script\"\n"
@@ -528,51 +545,5 @@ embedded_instances {
   ""
   position {
     z: 1.0
-  }
-}
-embedded_instances {
-  id: "lever1"
-  data: "components {\n"
-  "  id: \"lever\"\n"
-  "  component: \"/assets/scripts/lever.script\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"sprite\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"anim\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/builtins/graphics/particle_blob.tilesource\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_STATIC\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"interact\\\"\\n"
-  "mask: \\\"player\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_SPHERE\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 1\\n"
-  "  }\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 263.0
-    y: 113.0
   }
 }
