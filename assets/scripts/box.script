@@ -11,7 +11,9 @@ function on_message(self, message_id, message, sender)
 				go.set_position(go.get_position() + (message.normal * 16))
 			else
 				go.set_position(go.get_position() + (message.normal * message.distance))
-				self.set = true
+				timer.delay(.1, false, function()
+					self.set = true				
+				end)
 			end
 		end
 	end 
