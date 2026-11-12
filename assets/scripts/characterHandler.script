@@ -63,11 +63,12 @@ local function dropBox()
 			boxVel.x = 32
 		end
 		local bCheck = physics.raycast(go.get_position(), go.get_position() + boxVel, {hash("wall")})
+		local pCheck = physics.raycast(go.get_position(), go.get_position() - boxVel, {hash("wall")})		
 		if bCheck and bCheck.id ~= hash("/astralWall") then
 			boxVel.x = boxVel.x * bCheck.fraction
 			boxVel.y = boxVel.y * bCheck.fraction
 		end
-		local pCheck = physics.raycast(go.get_position(), go.get_position() - boxVel, {hash("wall")})
+		pprint(pCheck)
 		if pCheck then
 			pickup = true
 		else
