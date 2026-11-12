@@ -10,6 +10,7 @@ function on_message(self, message_id, message, sender)
 		end)
 	elseif not self.set and not self.pickup and message_id == hash("contact_point_response") and message.group == hash("wall") and math.floor(message.distance) > 0 then
 		if message.other_id ~= hash("/astralWall") and message.other_id ~= hash(go.get_id()) then
+			pprint(message)
 			if message.distance > 16 then
 				go.set_position(go.get_position() + (message.normal * 16))
 			else
