@@ -1,0 +1,4 @@
+images {
+  image: "/assets/imgbin/ch1Normal.png"
+}
+extrude_borders: 2
