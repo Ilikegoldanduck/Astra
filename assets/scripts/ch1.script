@@ -47,14 +47,14 @@ function on_message(self, message_id, message, sender)
 			wall2[2] = message[1]
 		end
 		if wall1[1] and wall1[2] and wall1[3] then
-			msg.post("wall#lever1", "disable")
+			msg.post("/togWal1", "disable")
 		else
-			msg.post("wall#lever1", "enable")
+			msg.post("/togWal1", "enable")
 		end
 		if wall2[1] and wall2[2] then
-			msg.post("wall#lever2", "disable")
+			msg.post("/togWal2", "disable")
 		else
-			msg.post("wall#lever2", "enable")
+			msg.post("/togWal2", "enable")
 		end
 	end
 end
