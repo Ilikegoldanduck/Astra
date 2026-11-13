@@ -100,7 +100,6 @@ local function dropBox(override)
 							break
 						end
 					end
-					--I need something that like checks corners ig..?
 				end
 			end
 		else

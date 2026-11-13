@@ -87,6 +87,30 @@ instances {
     y: 88.0
   }
 }
+instances {
+  id: "box5"
+  prototype: "/assets/gameObjects/box.go"
+  position {
+    x: -176.0
+    y: 80.0
+  }
+}
+instances {
+  id: "box6"
+  prototype: "/assets/gameObjects/box.go"
+  position {
+    x: -144.0
+    y: 80.0
+  }
+}
+instances {
+  id: "box7"
+  prototype: "/assets/gameObjects/box.go"
+  position {
+    x: -132.0
+    y: 112.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "player"
@@ -615,6 +639,9 @@ embedded_instances {
   children: "box2"
   children: "box3"
   children: "box4"
+  children: "box5"
+  children: "box6"
+  children: "box7"
   data: ""
   position {
     z: 0.6

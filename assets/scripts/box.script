@@ -1,6 +1,7 @@
 go.property("pickup", false)
 go.property("set", true)
 go.property("checkers", 0)
+go.property("attempts", 0)
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("pickup") then
@@ -20,6 +21,12 @@ function on_message(self, message_id, message, sender)
 				go.set_position(go.get_position() + (message.normal * 16))
 			else
 				go.set_position(go.get_position() + (message.normal * message.distance))
+			end
+			self.attempts = self.attempts + 1
+			if self.attempts > 3 then
+				pprint("done!" .. (vmath.vector3(message.normal.y, message.normal.x, 0) * message.distance))
+				go.set_position(go.get_position() + (vmath.vector3(message.normal.y, message.normal.x, 0) * message.distance))
+				self.attempts = 0
 			end
 		elseif self.set and message.other_id ~= hash("/astralWall") and message.other_id ~= hash(go.get_id()) then
 			self.checkers = self.checkers + 1
