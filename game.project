@@ -17,6 +17,7 @@ gravity_y = -1000.0
 scale = 0.01
 debug = 1
 use_fixed_timestep = 1
+debug_alpha = 0.1
 
 [html5]
 scale_mode = stretch

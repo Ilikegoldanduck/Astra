@@ -1,4 +1,6 @@
-local wall1 = {false, false}
+local wall1 = {false, false, false}
+local wall2 = {false, false}
+local wall3 = {false, false}
 
 function init(self)
 	
@@ -35,13 +37,24 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("interact") then
 		if sender.path == hash("/lever1") then
 			wall1[1] = message[1]
-		elseif sender.path == hash("/plate") then
+		elseif sender.path == hash("/lever") then
 			wall1[2] = message[1]
+		elseif sender.path == hash("/lever2") then
+			wall1[3] = message[1]
+		elseif sender.path == hash("/plate") then
+			wall2[1] = message[1]
+		elseif sender.path == hash("/plate1") then
+			wall2[2] = message[1]
 		end
-		if wall1[1] and wall1[2] then
+		if wall1[1] and wall1[2] and wall1[3] then
 			msg.post("wall#lever1", "disable")
 		else
 			msg.post("wall#lever1", "enable")
+		end
+		if wall2[1] and wall2[2] then
+			msg.post("wall#lever2", "disable")
+		else
+			msg.post("wall#lever2", "enable")
 		end
 	end
 end
