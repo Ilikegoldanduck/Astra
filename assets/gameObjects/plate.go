@@ -12,6 +12,10 @@ embedded_components {
   "  texture: \"/assets/imgbin/interacts.tilesource\"\n"
   "}\n"
   ""
+  scale {
+    x: 2.0
+    y: 2.0
+  }
 }
 embedded_components {
   id: "collisionobject"
