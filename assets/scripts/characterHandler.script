@@ -48,6 +48,13 @@ end
 
 local boxVel = vmath.vector3()
 
+local corners = {
+	vmath.vector3(1, 1, 0),
+	vmath.vector3(1, -1, 0),
+	vmath.vector3(-1, -1, 0),
+	vmath.vector3(-1, 1, 0)
+}
+
 local function dropBox(override)
 	if pickup then
 		local override2 = false
@@ -64,9 +71,7 @@ local function dropBox(override)
 			boxVel.x = 32
 		end
 		local bCheck = physics.raycast(go.get_position(), go.get_position() + boxVel, {hash("wall")})
-		local pCheck = physics.raycast(go.get_position(), go.get_position() - boxVel, {hash("wall")})		
-		pprint(bCheck)
-		pprint(pCheck)
+		local pCheck = physics.raycast(go.get_position(), go.get_position() - boxVel, {hash("wall")})
 		if bCheck and bCheck.id ~= hash("/astralWall") then
 			boxVel.x = boxVel.x * bCheck.fraction
 			boxVel.y = boxVel.y * bCheck.fraction
@@ -83,7 +88,19 @@ local function dropBox(override)
 					end
 				end
 				if pickup then
-					phase = true
+					for i, v in ipairs(corners) do
+						bCheck = physics.raycast(go.get_position(), go.get_position() + (corners * 32), {hash("wall")})
+						if bCheck then
+
+						else
+							go.set_position(go.get_position() + (corners * 32), box)
+							msg.post(box, "pickup", {pickup})
+							box = nil
+							pickup = false
+							break
+						end
+					end
+					--I need something that like checks corners ig..?
 				end
 			end
 		else
