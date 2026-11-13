@@ -1,0 +1,21 @@
+image: "/assets/imgbin/Interactables.png"
+tile_width: 15
+tile_height: 15
+collision_groups: "default"
+animations {
+  id: "leverDown"
+  frames: 2
+}
+animations {
+  id: "leverUp"
+  frames: 1
+}
+animations {
+  id: "plateDown"
+  frames: 4
+}
+animations {
+  id: "plateUp"
+  frames: 3
+}
+extrude_borders: 2

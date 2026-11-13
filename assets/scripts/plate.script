@@ -1,6 +1,11 @@
 go.property("held", false)
 
 function fixed_update(self, dt)
+	if self.held then
+		sprite.play_flipbook(".", "plateDown")
+	else
+		sprite.play_flipbook(".", "plateUp")
+	end
 	msg.post("/interactables#ch1", "interact", {self.held})
 	self.held = false
 end

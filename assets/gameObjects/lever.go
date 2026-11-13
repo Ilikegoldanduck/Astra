@@ -28,7 +28,7 @@ embedded_components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"anim\"\n"
+  data: "default_animation: \"leverDown\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "size {\n"
   "  x: 32.0\n"
@@ -36,7 +36,11 @@ embedded_components {
   "}\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/builtins/graphics/particle_blob.tilesource\"\n"
+  "  texture: \"/assets/imgbin/interacts.tilesource\"\n"
   "}\n"
   ""
+  scale {
+    x: 2.0
+    y: 2.0
+  }
 }

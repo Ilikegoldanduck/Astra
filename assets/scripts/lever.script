@@ -4,5 +4,10 @@ function on_message(self, message_id, message, sender)
 	if message[1] and message_id == hash("interact") then
 		self.flipped = not self.flipped
 		msg.post("/interactables#ch1", "interact", {self.flipped})
+		if self.flipped then
+			sprite.play_flipbook(".", "leverUp")
+		else
+			sprite.play_flipbook(".", "leverDown")
+		end
 	end
 end
